@@ -16,17 +16,19 @@ public:
         Y = rand() % 20 + 1;
     }
 
-    void wyswietlWspolrzedne() {
-        cout << X << " ";
-        cout << Y;
-    }
 
     void dodajPolaczenie(int punkt) {
         Polaczenia.push_back(punkt);
     }
 
+    void wyswietlWspolrzedne() {
+        cout << endl;
+        cout << "x=" << X; 
+        cout << " y=" << Y;
+    }
+
     void wyswietlPolaczenia() {
-        cout << "Connections: ";
+        cout << "connects to: ";
         for (int punkt : Polaczenia) {
             cout << punkt << " ";
         }
@@ -39,7 +41,7 @@ private:
 };
 
 int main() {
-    int punktyMax = 7;
+    int punktyMax = 7,wylosowanyPunkt;
 
     srand(time(0));
 
@@ -47,27 +49,22 @@ int main() {
 
     for (int i = 0; i < punktyMax; i++) {
         asdf[i].dodajWspolrzedne();
-
-        cout << "punkt " << i << " ";
-        asdf[i].wyswietlWspolrzedne();
-
-        cout << endl;
     }
 
-    // Adding connections randomly
-    for (int i = 0; i < punktyMax; i++) {
-        int numConnections = rand() % punktyMax; // Random number of connections for each point
-        for (int j = 0; j < numConnections; j++) {
-            int connectedPoint = rand() % punktyMax; // Randomly select another point to connect to
-            if (connectedPoint != i) // Avoid connecting to self
-                asdf[i].dodajPolaczenie(connectedPoint);
-        }
+    for (int i = 1; i < punktyMax; i++)
+    {
+        wylosowanyPunkt = rand() % i;
+        asdf[i].dodajPolaczenie(wylosowanyPunkt);
     }
 
     // Displaying connections
     for (int i = 0; i < punktyMax; i++) {
         cout << "punkt " << i << " ";
+        asdf[i].wyswietlWspolrzedne();
+
+        cout << endl;
         asdf[i].wyswietlPolaczenia();
+        cout << endl;
     }
 
     return 0;
