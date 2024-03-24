@@ -54,15 +54,6 @@ int main() {
         cout << endl;
     }
 
-    // Adding connections randomly
-    for (int i = 0; i < punktyMax; i++) {
-        int numConnections = rand() % punktyMax; // Random number of connections for each point
-        for (int j = 0; j < numConnections; j++) {
-            int connectedPoint = rand() % punktyMax; // Randomly select another point to connect to
-            if (connectedPoint != i) // Avoid connecting to self
-                asdf[i].dodajPolaczenie(connectedPoint);
-        }
-    }
 
     // Displaying connections
     for (int i = 0; i < punktyMax; i++) {
