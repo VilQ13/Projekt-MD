@@ -1,70 +1,74 @@
-﻿
-
-// C++ program to generate random numbers 
-#include <cstdlib> 
-#include <iostream> 
-#include <time.h> 
+﻿#include <cstdlib>
+#include <iostream>
+#include <time.h>
 #include <vector>
 
 using namespace std;
 
-
-class Punkt
-{
+class Punkt {
 public:
-    Punkt() 
-    {
-        
-    };
+    Punkt() {}
 
-    ~Punkt() {};
+    ~Punkt() {}
 
-    void  dodajWspolrzedne()
-    {
+    void dodajWspolrzedne() {
         X = rand() % 20 + 1;
         Y = rand() % 20 + 1;
     }
 
-    void wyswietlWspolrzedne()
-    {
-        cout<< X<<" ";
+    void wyswietlWspolrzedne() {
+        cout << X << " ";
         cout << Y;
     }
 
-
-    void dodajPolaczenie(int punkt)
-    {
+    void dodajPolaczenie(int punkt) {
         Polaczenia.push_back(punkt);
     }
 
+    void wyswietlPolaczenia() {
+        cout << "Connections: ";
+        for (int punkt : Polaczenia) {
+            cout << punkt << " ";
+        }
+        cout << endl;
+    }
 
 private:
     int X, Y;
     vector<int> Polaczenia;
 };
 
-int main() 
-{ 
+int main() {
     int punktyMax = 7;
 
     srand(time(0));
 
     Punkt asdf[7];
 
-    for (int i = 0; i < punktyMax; i++)
-    {
+    for (int i = 0; i < punktyMax; i++) {
+        asdf[i].dodajWspolrzedne();
 
-    asdf[i].dodajWspolrzedne();
+        cout << "punkt " << i << " ";
+        asdf[i].wyswietlWspolrzedne();
 
-    cout << "punbkt " << i<<" ";
-    asdf[i].wyswietlWspolrzedne();
-
-    cout << endl;
+        cout << endl;
     }
 
+    // Adding connections randomly
+    for (int i = 0; i < punktyMax; i++) {
+        int numConnections = rand() % punktyMax; // Random number of connections for each point
+        for (int j = 0; j < numConnections; j++) {
+            int connectedPoint = rand() % punktyMax; // Randomly select another point to connect to
+            if (connectedPoint != i) // Avoid connecting to self
+                asdf[i].dodajPolaczenie(connectedPoint);
+        }
+    }
 
+    // Displaying connections
+    for (int i = 0; i < punktyMax; i++) {
+        cout << "punkt " << i << " ";
+        asdf[i].wyswietlPolaczenia();
+    }
 
-    return 0; 
-
+    return 0;
 }
-
