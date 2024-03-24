@@ -3,6 +3,8 @@
 #include <time.h>
 #include <vector>
 
+//tutaj bedzie dodawany interfejs z OpenGL dla C++
+
 using namespace std;
 
 class Punkt {
