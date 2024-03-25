@@ -1,53 +1,71 @@
-﻿#include <iostream>
-#include <cstdlib>
+﻿#include <cstdlib>
+#include <iostream>
+#include <time.h>
+#include <vector>
 
 using namespace std;
 
-int V = 5, 
-	E = 10;
-
-class Vertice
-{
+class Punkt {
 public:
-	int x, y;
-	Vertice();
-	~Vertice();
+    Punkt() {}
+
+    ~Punkt() {}
+
+    void dodajWspolrzedne() {
+        X = rand() % 20 + 1;
+        Y = rand() % 20 + 1;
+    }
+
+
+    void dodajPolaczenie(int punkt) {
+        Polaczenia.push_back(punkt);
+    }
+
+    void wyswietlWspolrzedne() {
+        cout << endl;
+        cout << "x=" << X; 
+        cout << " y=" << Y;
+    }
+
+    void wyswietlPolaczenia() {
+        cout << "connects to: ";
+        for (int punkt : Polaczenia) {
+            cout << punkt << " ";
+        }
+        cout << endl;
+    }
 
 private:
-	void create_point(int *x, int *y)
-	{
-
-	};
+    int X, Y;
+    vector<int> Polaczenia;
 };
 
-Vertice::Vertice()
-{
-	create_point(x,y);
-}
+int main() {
+    int punktyMax = 7,wylosowanyPunkt;
 
-Vertice::~Vertice()
-{
-}
+    srand(time(0));
 
+    Punkt asdf[7];
 
-int main()
-{
-	Vertice Vertice1;
+    for (int i = 0; i < punktyMax; i++) {
+        asdf[i].dodajWspolrzedne();
+    }
 
+    for (int i = 1; i < punktyMax; i++)
+    {
+        wylosowanyPunkt = rand() % i;
+        asdf[i].dodajPolaczenie(wylosowanyPunkt);
+    }
 
-	int *vertices = new int[V];
+    // Displaying connections
+    for (int i = 0; i < punktyMax; i++) {
+        cout << "punkt " << i << " ";
+        asdf[i].wyswietlWspolrzedne();
 
-	for (int i = 0; i < V; i++)
-	{
-		vertices[i] = i + 1;
-	}
+        cout << endl;
+        asdf[i].wyswietlPolaczenia();
+        cout << endl;
+    }
 
-
-	
-	
-	for (int i = 0; i < 15; i++)
-	{
-		int wybranyWierzch = rand() % V + 1;
-		cout << wybranyWierzch <<endl;
-	}
+    return 0;
 }
